@@ -37,18 +37,43 @@
 
     @screen md
     {
-      font-size: 147px;
+      font-size: 144px;
+    }
+
+    @screen lg
+    {
+      font-size: 144px;
     }
   }
 
   .tp-2
   {
-    @apply font-['Bellefair'] text-[100px] leading-[1.145] tracking-[0];
+    @apply font-['Bellefair'] text-[56px] leading-[1.145] tracking-[0];
+
+    @screen md
+    {
+      font-size: 80px;
+    }
+
+    @screen lg
+    {
+      font-size: 96px;
+    }
   }
 
   .tp-3
   {
-    @apply font-['Bellefair'] text-[56px] leading-[0.642] tracking-[0];
+    @apply font-['Bellefair'] text-[24px] leading-[0.642] tracking-[0];
+
+    @screen md
+    {
+      font-size: 40px;
+    }
+
+    @screen lg
+    {
+      font-size: 56px;
+    }
   }
 
   .tp-4
@@ -68,14 +93,19 @@
 
   .tp-5
   {
-    @apply font-['Barlow_Condensed'] text-[28px] leading-[0.336] tracking-[4px];
+    @apply font-['Barlow_Condensed'] text-[20px] leading-[0.336] tracking-[4px];
+
+    @screen md
+    {
+      font-size: 28px;
+    }
   }
 
   .tp-6
   {
     @apply font-['Bellefair'] text-[16px] leading-[0.321] tracking-[0];
 
-    @screen md
+    @screen lg
     {
       font-size: 28px;
     }
