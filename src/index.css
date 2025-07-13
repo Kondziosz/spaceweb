@@ -31,9 +31,25 @@
     }
   }
 
+  .bg-destination
+  {
+    background-image: url('/background-destination-mobile.jpg');
+    @apply bg-cover bg-center;
+
+    @screen md
+    {
+      background-image: url('/background-destination-tablet.jpg');
+    }
+
+    @screen lg
+    {
+      background-image: url('/background-destination-desktop.jpg');
+    }
+  }
+
   .tp-1
   {
-    @apply font-['Bellefair'] text-[80px] leading-[1.719] tracking-[0];
+    @apply font-['Bellefair'] text-[80px] leading-normal tracking-[0];
 
     @screen md
     {
@@ -48,7 +64,7 @@
 
   .tp-2
   {
-    @apply font-['Bellefair'] text-[56px] leading-[1.145] tracking-[0];
+    @apply font-['Bellefair'] text-[56px] leading-normal tracking-[0];
 
     @screen md
     {
@@ -58,12 +74,13 @@
     @screen lg
     {
       font-size: 96px;
+      line-height: 1.145;
     }
   }
 
   .tp-3
   {
-    @apply font-['Bellefair'] text-[24px] leading-[0.642] tracking-[0];
+    @apply font-['Bellefair'] text-[24px] leading-normal tracking-[0];
 
     @screen md
     {
@@ -78,7 +95,7 @@
 
   .tp-4
   {
-    @apply font-['Bellefair'] text-[18px] leading-[0.336] tracking-[4px];
+    @apply font-['Bellefair'] text-[18px] leading-normal tracking-[4px];
 
     @screen md
     {
@@ -93,9 +110,14 @@
 
   .tp-5
   {
-    @apply font-['Barlow_Condensed'] text-[20px] leading-[0.336] tracking-[4px];
+    @apply font-['Barlow_Condensed'] text-[20px] leading-normal tracking-[4px];
 
     @screen md
+    {
+      font-size: 20px;
+    }
+
+    @screen lg
     {
       font-size: 28px;
     }
@@ -103,7 +125,7 @@
 
   .tp-6
   {
-    @apply font-['Bellefair'] text-[16px] leading-[0.321] tracking-[0];
+    @apply font-['Bellefair'] text-[16px] leading-normal tracking-[0];
 
     @screen lg
     {
@@ -113,14 +135,14 @@
 
   .tp-7
   {
-    @apply font-['Barlow_Condensed'] text-[14px] leading-[0.168] tracking-[2px];
+    @apply font-['Barlow_Condensed'] text-[14px] leading-normal tracking-[2px];
   }
 
   .tp-8
   {
-    @apply font-['Barlow_Condensed'] text-[14px] leading-[0.192] tracking-[2px];
+    @apply font-['Barlow_Condensed'] text-[14px] leading-normal tracking-[2px];
 
-    @screen lg
+    @screen md
     {
       font-size: 16px;
     }
@@ -128,7 +150,7 @@
 
   .tp-8b
   {
-    @apply font-['Barlow_Condensed'] text-[14px] leading-[0.192] tracking-[2.7px] font-bold;
+    @apply font-['Barlow_Condensed'] text-[14px] leading-[1] tracking-[2.7px] font-bold;
 
     @screen lg
     {
