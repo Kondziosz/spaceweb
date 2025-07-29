@@ -47,6 +47,38 @@
     }
   }
 
+  .bg-crew
+  {
+    background-image: url('/background-crew-mobile.jpg');
+    @apply bg-cover bg-center;
+
+    @screen md
+    {
+      background-image: url('/background-crew-tablet.jpg');
+    }
+
+    @screen lg
+    {
+      background-image: url('/background-crew-desktop.jpg');
+    }
+  }
+
+  .bg-technology
+  {
+    background-image: url('/background-technology-mobile.jpg');
+    @apply bg-cover bg-center;
+
+    @screen md
+    {
+      background-image: url('/background-technology-tablet.jpg');
+    }
+
+    @screen lg
+    {
+      background-image: url('/background-technology-desktop.jpg');
+    }
+  }
+
   .tp-1
   {
     @apply font-['Bellefair'] text-[80px] leading-normal tracking-[0];
@@ -150,7 +182,7 @@
 
   .tp-8b
   {
-    @apply font-['Barlow_Condensed'] text-[14px] leading-[1] tracking-[2.7px] font-bold;
+    @apply font-['Barlow_Condensed'] text-[14px] leading-normal tracking-[2.7px] font-bold;
 
     @screen lg
     {
