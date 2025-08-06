@@ -12,7 +12,7 @@ function Navbar() {
         <div className="min-w-[560px] h-[1px] opacity-25 bg-white hidden lg:block z-10" />
       </div>
       <div className="flex-1 h-full md:hidden flex justify-end pr-300 gap-100 items-center">
-        <img src="/icon-hamburger.svg" className=" h-[21px] " />
+        <img src="/spaceweb/icon-hamburger.svg" className=" h-[21px] " />
       </div>
       <nav className="hidden md:flex justify-end gap-600 lg:px-800 min-w-[664px] w-full h-max bg-[rgba(255,255,255,0.05)] backdrop-blur-[8px] ml-auto md:min-w-[488px] md:px-500">
         <MotionNavLink

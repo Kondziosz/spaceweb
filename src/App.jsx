@@ -33,8 +33,12 @@ const router = createBrowserRouter([
         handle: { bg: "bg-technology" },
       },
     ],
+
   },
-]);
+],
+ {
+    basename: "/spaceweb",
+  });
 
 function App() {
   return <RouterProvider router={router} />;

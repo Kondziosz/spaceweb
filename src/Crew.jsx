@@ -8,28 +8,28 @@ import { color, motion } from "framer-motion";
 const crewMembers = {
   douglas: {
     name: "Douglas Hurley",
-    image: "/image-douglas-hurley.png",
+    image: "/spaceweb/image-douglas-hurley.png",
     route: "douglas",
     info: "Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and former NASA astronaut. He launched into space for the third time as commander of Crew Dragon Demo-2.",
     rank: "Commander",
   },
   mark: {
     name: "Mark Shuttleworth",
-    image: "/image-mark-shuttleworth.png",
+    image: "/spaceweb/image-mark-shuttleworth.png",
     route: "mark",
     info: "Mark Richard Shuttleworth is the founder and CEO of Canonical, the company behind the Linux-based Ubuntu operating system. Shuttleworth became the first South African to travel to space as a space tourist.",
     rank: "Mission Specialist",
   },
   victor: {
     name: "Victor Glover",
-    image: "/image-victor-glover.png",
+    image: "/spaceweb/image-victor-glover.png",
     route: "victor",
     info: "Pilot on the first operational flight of the SpaceX Crew Dragon to the International Space Station. Glover is a commander in the U.S. Navy where he pilots an F/A-18.He was a crew member of Expedition 64, and served as a station systems flight engineer. ",
     rank: "Pilot",
   },
   anousheh: {
     name: "Anousheh Ansari",
-    image: "/image-anousheh-ansari.png",
+    image: "/spaceweb/image-anousheh-ansari.png",
     route: "anousheh",
     info: "Anousheh Ansari is an Iranian American engineer and co-founder of Prodea Systems. Ansari was the fourth self-funded space tourist, the first self-funded woman to fly to the ISS, and the first Iranian in space. ",
     rank: "Flight Engineer",
@@ -46,7 +46,7 @@ function NavDots() {
   const { pathname } = useLocation();
   return (
     <nav className="w-full h-fit flex justify-center gap-200 lg:mt-auto lg:justify-start lg:pb-600 lg:gap-500">
-      {Object.values(crewMembers).map((m) => 
+      {Object.values(crewMembers).map((m) =>
 {
         const isActive = pathname.startsWith(`/crew/${m.route}`);
         return (
@@ -68,7 +68,7 @@ function NavDots() {
     </nav>
   );
 }
-function Crew() 
+function Crew()
 {
   const info = useLoaderData();
   const { name } = useParams();
