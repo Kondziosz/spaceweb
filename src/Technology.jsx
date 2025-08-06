@@ -1,4 +1,10 @@
-import { NavLink, useLoaderData, useParams } from "react-router-dom";
+import {
+  NavLink,
+  useLoaderData,
+  useParams,
+  useLocation,
+} from "react-router-dom";
+import { motion } from "framer-motion";
 
 const technologyData = {
   launch: {
@@ -21,24 +27,31 @@ const technologyData = {
   },
 };
 
-export async function technologyLoader({ params }) 
+export async function technologyLoader({ params })
 {
   const info = technologyData[params.route?.toLowerCase()];
   if (!info) throw new Response("Not Found", { status: 404 });
   return info;
 }
 function NavDots() {
+  const { pathname } = useLocation();
   return (
     <nav className="max-w-[514px] gap-200 flex flex-1 justify-center lg:flex-col lg:gap-400">
-      {Object.values(technologyData).map((t, index) => (
-        <NavLink
-          key={t.route}
-          to={`/technology/${t.route}`}
-          className="w-[40px] h-[40px] md:w-[56px] md:h-[56px] lg:w-[80px] lg:h-[80px] bg-white rounded-full z-10 flex items-center justify-center text-black"
-        >
-          {index + 1}
-        </NavLink>
-      ))}
+      {Object.values(technologyData).map((t, index) => {
+        const isActive = pathname.startsWith(`/technology/${t.route}`);
+        return (
+          <NavLink
+            key={t.route}
+            to={`/technology/${t.route}`}
+            className={`w-[40px] h-[40px] md:w-[56px] md:h-[56px] lg:w-[80px] lg:h-[80px] tp-4  rounded-full z-10 flex flex-row items-center justify-center text-center ${isActive ? "text-black bg-white" : "text-white bg-transparent "} border-[1px] border-white border-opacity-25 hover:border-opacity-100 transition-all
+             duration-300 ease-in-out`}
+          >
+            <span className="flex items-center justify-center text-center w-fit h-fit !tracking-[0px] mx-auto">
+              {index + 1}
+            </span>
+          </NavLink>
+        );
+      })}
     </nav>
   );
 }
@@ -61,18 +74,22 @@ function Technology() {
         {/* content */}
         <div className="gap-400 flex flex-col w-full h-full min-h-0 items-center lg:flex-row-reverse lg:min-w-0">
           {/* Image */}
-          <div className="flex w-full md:w-[100vw] flex-1 relative pt-[64px] overflow-hidden justify-center lg:justify-end min-h-0 min-w-[768px] lg:pt-0 lg:!h-full lg:min-w-0 ">
+          <motion.div className="flex w-full md:w-[100vw] flex-1 relative pt-[64px] overflow-hidden justify-center lg:justify-end min-h-0 min-w-[768px] lg:pt-0 lg:!h-full lg:min-w-0 " initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}>
             <img
               src={info.image}
               className=" w-[100vw] h-auto lg:!w-auto lg:!h-full object-cover object-bottom md:object-center"
             ></img>
-          </div>
+          </motion.div>
           {/* Text and Pagination */}
           <div className=" gap-500 flex flex-col w-full h-fit justify-center md:items-center lg:flex-row lg:min-w-[635px] lg:gap-800 lg:flex-1">
             {/* Pagination */}
             <NavDots />
             {/* Text */}
-            <div className="flex-col flex h-fit w-full gap-200 max-w-[514px] md:justify-between lg:max-w-[640px] lg:gap-300 lg:items-start">
+            <motion.div className="flex-col flex h-fit w-full gap-200 max-w-[514px] md:justify-between lg:max-w-[640px] lg:gap-300 lg:items-start" initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}>
               {/* Rank and Name */}
               <div className="flex flex-col w-full h-fit gap-200 items-center lg:items-start ">
                 <p className="tp-4 uppercase opacity-50 !tracking-[0]">
@@ -83,7 +100,7 @@ function Technology() {
               <p className="tp-9 text-center lg:text-left text-[#D0D6F9]">
                 {info.info}
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

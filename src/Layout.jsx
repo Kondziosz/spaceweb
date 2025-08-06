@@ -1,8 +1,14 @@
 import Navbar from "./Navbar.jsx";
-import { Outlet, useMatches } from "react-router-dom";
+import { Outlet, useMatches, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect } from "react";
 
 function Layout() {
+  const location = useLocation();
   const matches = useMatches();
+  useEffect(() => {
+    console.log("Rendered:", location.pathname);
+  }, [location.pathname]);
   const bgClass = matches
     .slice()
     .reverse()
@@ -12,7 +18,14 @@ function Layout() {
       className={`w-full max-w-none h-screen ${bgClass} touch-none flex flex-col overflow-hidden`}
     >
       <Navbar />
-      <Outlet />
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={location.pathname}
+          className="flex flex-col overflow-hidden w-full h-full"
+        >
+          <Outlet />
+        </motion.div>
+      </AnimatePresence>
     </div>
   );
 }

@@ -127,7 +127,7 @@
 
   .tp-4
   {
-    @apply font-['Bellefair'] text-[18px] leading-normal tracking-[4px];
+    @apply font-['Bellefair'] text-[18px] leading-none tracking-[4px];
 
     @screen md
     {

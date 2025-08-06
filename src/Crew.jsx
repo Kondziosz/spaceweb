@@ -1,4 +1,10 @@
-import { NavLink, useLoaderData, useParams } from "react-router-dom";
+import {
+  NavLink,
+  useLoaderData,
+  useParams,
+  useLocation,
+} from "react-router-dom";
+import { color, motion } from "framer-motion";
 const crewMembers = {
   douglas: {
     name: "Douglas Hurley",
@@ -35,16 +41,30 @@ export async function crewLoader({ params }) {
   if (!info) throw new Response("Not Found", { status: 404 });
   return info;
 }
+const MotionNavLink = motion.create(NavLink);
 function NavDots() {
+  const { pathname } = useLocation();
   return (
     <nav className="w-full h-fit flex justify-center gap-200 lg:mt-auto lg:justify-start lg:pb-600 lg:gap-500">
-      {Object.values(crewMembers).map((m) => (
-        <NavLink
-          key={m.route}
-          to={`/crew/${m.route}`}
-          className="w-[10px] h-[10px] rounded-full bg-white opacity-[0.1744]"
-        />
-      ))}
+      {Object.values(crewMembers).map((m) => 
+{
+        const isActive = pathname.startsWith(`/crew/${m.route}`);
+        return (
+          <MotionNavLink
+            key={m.route}
+            to={`/crew/${m.route}`}
+            className="relative w-[10px] h-[10px] rounded-full bg-white opacity-[0.1744]"
+            whileHover={!isActive ? { opacity: 0.5 } : undefined}
+            animate={isActive ? { opacity: 1 } : { opacity: 0.1744 }}
+            transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1 }}
+          >
+            {" "}
+            {isActive && (
+              <span className="absolute w-full h-full rounded-full  bg-white opacity-100" />
+            )}
+          </MotionNavLink>
+        );
+      })}
     </nav>
   );
 }
@@ -68,7 +88,12 @@ function Crew()
         <div className="flex flex-col flex-1 gap-400 min-h-0 md:min-h-[auto] lg:min-h-0 lg:min-w-0 md:items-center lg:flex-row">
           {/* text */}
           <div className="flex flex-col h-fit w-full gap-500 max-w-[514px] justify-between lg:min-w-[445px] lg:flex-1 lg:h-full">
-            <div className="flex flex-col w-full h-fit gap-300 pt-500 lg:flex-1 lg:max-w-[640px] lg:p-0 lg:justify-center">
+            <motion.div
+              className="flex flex-col w-full h-fit gap-300 pt-500 lg:flex-1 lg:max-w-[640px] lg:p-0 lg:justify-center"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+            >
               <div className="flex flex-col gap-300 max-w-[640px] w-full h-fit justify-start">
                 {/*rank and name */}
                 <div className="flex flex-col w-full h-fit gap-100 items-center lg:items-start">
@@ -82,17 +107,22 @@ function Crew()
                   {info.info}
                 </p>
               </div>
-            </div>
+            </motion.div>
             {/* NavDots */}
             <NavDots />
           </div>
           {/*image */}
-          <div className="flex flex-1 min-h-0 md:min-h-[auto] lg:min-h-0 lg:min-w-0 px-[27.88px] py-[5px] lg:py-[29px] justify-center items-center lg:h-full">
+          <motion.div
+            className="flex flex-1 min-h-0 md:min-h-[auto] lg:min-h-0 lg:min-w-0 px-[27.88px] py-[5px] lg:py-[29px] justify-center items-center lg:h-full"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
             <img
               className="max-h-full h-auto w-auto max-w-full object-contain   [-webkit-mask-image:linear-gradient(to_bottom,rgba(255,255,255,1)_0%,rgba(255,255,255,1)_60%,rgba(255,255,255,0)_100%)]  lg:[-webkit-mask-image:linear-gradient(to_bottom,rgba(255,255,255,1)_0%,rgba(255,255,255,1)_60%,rgba(255,255,255,0)_100%)] md:p-0"
               src={info.image}
             />
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>

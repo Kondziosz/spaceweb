@@ -1,4 +1,10 @@
-import { NavLink, useLoaderData, useParams } from "react-router-dom";
+import {
+  NavLink,
+  useLoaderData,
+  useParams,
+  useLocation,
+} from "react-router-dom";
+import { AnimatePresence, color, motion } from "framer-motion";
 const planets = {
   moon: {
     name: "Moon",
@@ -44,20 +50,38 @@ export async function destinationLoader({ params }) {
   return info;
 }
 
+const MotionNavLink = motion.create(NavLink);
+
 function NavLinkPlanet() {
+  const { pathname } = useLocation();
   return (
     <nav className="flex flex-none h-fit gap-400 justify-center">
-      {Object.values(planets).map((p) => (
-        <NavLink
-          key={p.route}
-          to={`/destination/${p.route}`}
-          className={`h-[32px] w-fit`}
-        >
-          <div className="h-fit w-fit">
-            <p className="tp-8 text-[#D0D6F9] uppercase">{p.name}</p>
-          </div>
-        </NavLink>
-      ))}
+      {Object.values(planets).map((p) => 
+{
+        const isActive = pathname.startsWith(`/destination/${p.route}`);
+        return (
+          <MotionNavLink
+            key={p.route}
+            to={`/destination/${p.route}`}
+            className={`relative h-[32px] w-fit border-b-[3px] border-b-transparent`}
+            animate={
+              isActive
+                ? { borderBottomColor: "rgba(255,255,255,1)" }
+                : { borderBottomColor: "rgba(255,255,255,0)" }
+            }
+            whileHover={
+              !isActive
+                ? { borderBottomColor: "rgba(255,255,255,0.5)" }
+                : undefined
+            }
+            transition={{ type: "spring", stiffness: 80, damping: 20, mass: 1 }}
+          >
+            <div className="h-fit w-fit">
+              <p className="tp-8 text-[#D0D6F9] uppercase">{p.name}</p>
+            </div>
+          </MotionNavLink>
+        );
+      })}
     </nav>
   );
 }
@@ -78,7 +102,12 @@ function Destination() {
               PICK YOUR DESTINATION
             </p>
           </div>
-          <div className="flex flex-col gap-400 min-h-0 flex-1 lg:flex-row lg:justify-between">
+          <motion.div
+            className="flex flex-col gap-400 min-h-0 flex-1 lg:flex-row lg:justify-between"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
             <div className="flex flex-col items-center justify-center flex-shrink-[10] h-full min-h-0 lg:flex-shrink-0">
               <img
                 src={info.image}
@@ -107,7 +136,7 @@ function Destination() {
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>
